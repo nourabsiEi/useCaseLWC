@@ -1,0 +1,32 @@
+<template>
+    <lightning-card title="Available Products">
+        <div class="slds-m-around_medium">
+            <lightning-button label="Get selected" onclick={handleChanges}></lightning-button>
+            <template if:true={displayError}>
+                <div class="slds-m-vertical_medium">
+                    These are the details!
+                </div>
+            </template>
+            <lightning-button label="Activate Order" onclick={activateOrder}></lightning-button>
+            <lightning-input type="search" onchange={handleKeyChange} class="slds-m-bottom_small" label="Search"
+                value={searchKey}></lightning-input>
+            <lightning-datatable key-field="Id" data={data} columns={columns} sorted-by={sortedBy}
+                sorted-direction={sortedDirection} onsort={sortColumns} onrowselection={unSelect}>
+            </lightning-datatable>
+            </br>
+            <lightning-layout horizontal-align="space">
+                <lightning-layout-item flexibility="auto">
+                    <lightning-button label="Previous" icon-name="utility:chevronleft" onclick={previousHandler}>
+                    </lightning-button>
+                </lightning-layout-item>
+                <lightning-layout-item flexibility="auto">
+                    Page {page} of {totalPage}
+                </lightning-layout-item>
+                <lightning-layout-item flexibility="auto">
+                    <lightning-button label="Next" icon-name="utility:chevronright" icon-position="right"
+                        onclick={nextHandler}></lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </lightning-card>
+</template>

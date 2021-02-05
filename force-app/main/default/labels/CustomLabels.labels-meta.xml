@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>AvailableProductsController_errOrderItemCreation</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AvailableProductsController_errOrderItemCreation</shortDescription>
+        <value>Order Item was not added successfully to the Order. Please Contact your administrator.</value>
+    </labels>
+    <labels>
+        <fullName>AvailableProductsController_errPricebookOrder</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AvailableProductsController_errPricebookOrder</shortDescription>
+        <value>A problem occured while updating the Pricebook of the current Order. Please Contact your administrator.</value>
+    </labels>
+</CustomLabels>
