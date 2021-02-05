@@ -2,7 +2,8 @@ import { LightningElement, wire, api, track} from 'lwc';
 import { refreshApex } from '@salesforce/apex';
 import getProducts from '@salesforce/apex/AvailableProductsController.getProducts';
 import insertUpdateOrderProducts from '@salesforce/apex/AvailableProductsController.insertUpdateOrderProducts';
-//import activateOrder from '@salesforce/apex/AvailableProductsController.activateOrder';
+import activateOrder from '@salesforce/apex/ActivateProductController.activateOrder';
+import getOrderStatus from '@salesforce/apex/ActivateProductController.getOrderStatus';
 
 import{CurrentPageReference}
       from 'lightning/navigation';
@@ -27,6 +28,7 @@ export default class AvailableProducts extends LightningElement {
     @track value;
     @track error;
     @track data;
+    @track disabledButton;
     @api sortedDirection = 'asc';
     @api sortedBy = 'Name';
     @api searchKey = '';
@@ -113,18 +115,19 @@ export default class AvailableProducts extends LightningElement {
     })
     .catch(error => {
         this.error = error;
-        this.contacts = undefined;
     });
 }
 else {
     this.displayError = true;
 }
     }
-    //activateOrder() {
-       // console.log(this.recordId );
-       //activateOrder({ orderId: this.recordId  })
+    activateOrder() {
+       console.log(this.recordId );
+       activateOrder({ orderId: this.recordId  });
+       this.disabledButton = true;
+       window.location.reload();
 
-   // }
+    }
     handleKeyChange( event ) {
         this.searchKey = event.target.value;
         return refreshApex(this.result);
@@ -133,6 +136,27 @@ else {
     unSelect(event)
     {
         this.displayError = false; 
+    }
+
+    connectedCallback(){
+        getOrderStatus({ orderId: this.recordId  })
+        .then(
+        
+            result => { 
+                //Fire event to the Order Product Component on the page 
+            console.log('result' + result);
+            if(result == 'Activated')
+            {
+                this.disabledButton = true;
+            }
+            else
+            this.disabledButton = false;
+        })
+        .catch(error => {
+            this.error = error;
+         
+        });
+        
     }
 
 }

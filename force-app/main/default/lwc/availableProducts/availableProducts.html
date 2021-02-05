@@ -1,13 +1,15 @@
 <template>
     <lightning-card title="Available Products">
         <div class="slds-m-around_medium">
-            <lightning-button label="Get selected" onclick={handleChanges}></lightning-button>
+            <lightning-button label="Add Products" onclick={handleChanges} disabled={disabledButton}></lightning-button>
+            &nbsp;
             <template if:true={displayError}>
                 <div class="slds-m-vertical_medium">
-                    These are the details!
+                    No products Selected!
                 </div>
             </template>
-            <lightning-button label="Activate Order" onclick={activateOrder}></lightning-button>
+            &nbsp;
+            <lightning-button label="Activate Order" onclick={activateOrder} disabled={disabledButton}></lightning-button>
             <lightning-input type="search" onchange={handleKeyChange} class="slds-m-bottom_small" label="Search"
                 value={searchKey}></lightning-input>
             <lightning-datatable key-field="Id" data={data} columns={columns} sorted-by={sortedBy}
